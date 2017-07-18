@@ -1,0 +1,58 @@
+buildscript {
+    ext {
+        springBootVersion = '1.5.4.RELEASE'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'maven'
+apply plugin: 'org.springframework.boot'
+
+group = 'com.scheduler'
+version = '0.0.1'
+
+description = """scheduler-transfer"""
+
+sourceCompatibility = 1.8
+targetCompatibility = 1.8
+tasks.withType(JavaCompile) {
+	options.encoding = 'UTF-8'
+}
+
+repositories {
+        
+     maven { url "http://repo.maven.apache.org/maven2" }
+}
+dependencies {
+    compile(group: 'org.springframework.boot', name: 'spring-boot-starter', version:'1.5.4.RELEASE') {
+exclude(module: 'commons-logging')
+    }
+    compile group: 'joda-time', name: 'joda-time', version:'2.9.9'
+    compile group: 'javax.validation', name: 'validation-api', version:'1.1.0.Final'
+    compile group: 'org.hibernate', name: 'hibernate-validator', version:'5.4.1.Final'
+    compile group: 'javax.el', name: 'javax.el-api', version:'2.2.4'
+    compile group: 'org.glassfish.web', name: 'javax.el', version:'2.2.4'
+    compile group: 'org.springframework.data', name: 'spring-data-rest-webmvc', version:'2.6.4.RELEASE'
+    compile group: 'org.springframework.boot', name: 'spring-boot-starter-web', version:'1.5.4.RELEASE'
+    testCompile(group: 'org.springframework.boot', name: 'spring-boot-starter-test', version:'1.5.4.RELEASE') {
+exclude(module: 'commons-logging')
+    }
+    testCompile(group: 'junit', name: 'junit', version:'4.12') {
+exclude(module: 'hamcrest-core')
+    }
+    testCompile group: 'org.springframework', name: 'spring-test', version:'4.3.9.RELEASE'
+    testCompile group: 'org.hamcrest', name: 'hamcrest-all', version:'1.3'
+    testCompile(group: 'org.mockito', name: 'mockito-core', version:'1.10.19') {
+exclude(module: 'hamcrest-core')
+    }
+    testCompile(group: 'com.jayway.jsonpath', name: 'json-path-assert', version:'2.2.0') {
+exclude(module: 'hamcrest-core')
+exclude(module: 'slf4j-api')
+    }
+}
